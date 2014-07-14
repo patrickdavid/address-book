@@ -1,32 +1,21 @@
-var pigLatin = function (word) {
-  var result = word + "ay";
-  var vowelArray = ["a","e","i","o","u","y"];
-  var n = 0;
-  var re = /^y/;
-  // if (word.charAt(0) === "y") {
-  if (word.search(re) >= 0) {
-    vowelArray.pop();
-  };
-  while (vowelArray.indexOf(word.charAt(n)) < 0) {
-    if (word.charAt(n) === "q") {
-      result = word.slice(n+2) + word.slice(0,n+2) + "ay";
-    } else {
-    result = word.slice(n+1) + word.slice(0,n+1) + "ay";
-    };
-    n+=1;
-  };
-  return result;
-};
-
-var sentencePigLatin = function (sentence) {
-  var words = sentence.split(" ");
-  var finalWords = [];
-  words.forEach(function(word) {
-    finalWords.push(pigLatin(word));
+$(document).ready (function() {
+  $("form#new-contact").submit(function(event) {
+    var inputtedFirstName = $("input#new-first-name").val();
+    var inputtedLastName = $("input#new-last-name").val();
+    var inputtedAddress = $("input#new-address").val();
+    console.log(inputtedAddress);
+    var contact = {firstName: inputtedFirstName, lastName: inputtedLastName, address: inputtedAddress};
+    $("ul").append("<li>"+contact.firstName+ " "+contact.lastName+"</li>");
+    $("#show-contacts").show();
+    $("input#new-first-name").val("");
+    $("input#new-last-name").val("");
+    $("input#new-address").val("");
+    $("li").last().click(function() {
+      $("#show-details").show();
+      $("#first-name").text(contact.firstName);
+      $("#last-name").text(contact.lastName);
+      $("#address").text(contact.address);
+    });
+    event.preventDefault();
   });
-  // var finalWords = "";
-  // words.forEach(function(word) {
-  //   finalWords = finalWords + " " + pigLatin(word) + " ";
-  // });
-  return finalWords.join(" ");
-};
+});
