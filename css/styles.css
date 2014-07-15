@@ -5,11 +5,11 @@
   display: none;
 }
 
-li  {
+li.contactEntry  {
   cursor: pointer;
   color: blue;
 }
 
-li:hover  {
+li.contactEntry :hover  {
   text-decoration: underline;
 }
